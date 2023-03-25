@@ -9,7 +9,7 @@ import HTTP_STATUS from 'http-status-codes';
 
 const validationVatCache = new NodeCache();
 
-export class ValidateVatController {
+class ValidateVatController {
   @joiValidation(validateVatSchema)
   public async read(req: Request, res: Response): Promise<void> {
     const { vatNumber } = req.body;
@@ -41,3 +41,5 @@ export class ValidateVatController {
     });
   }
 }
+
+export const validationVatController = new ValidateVatController();

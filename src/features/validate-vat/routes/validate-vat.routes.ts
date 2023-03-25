@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ValidateVatController } from '../controllers/validate-vat.controller';
+import { validationVatController } from '../controllers/validate-vat.controller';
 
 class ValidateVatRoutes {
   private router: Router;
@@ -9,7 +9,7 @@ class ValidateVatRoutes {
   }
 
   public routes(): Router {
-    this.router.post('/validate-vat', ValidateVatController.prototype.read);
+    this.router.post('/validate-vat', validationVatController.read);
 
     return this.router;
   }
