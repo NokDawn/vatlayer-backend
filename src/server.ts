@@ -13,6 +13,7 @@ import hpp from 'hpp';
 import cookieSession from 'cookie-session';
 import compression from 'compression';
 import HTTP_STATUS from 'http-status-codes';
+import { config } from './config';
 import 'express-async-errors';
 
 const SERVER_PORT = 5000;
@@ -36,16 +37,16 @@ export class VatLayerServer {
     app.use(
       cookieSession({
         name: 'session',
-        keys: ['test1', 'test2'],
+        keys: [config.COOKIE_KEY_ONE!, config.COOKIE_KEY_TWO!],
         maxAge: 24 * 60 * 60 * 1000, // 24 hours
-        secure: false, // change to true if https
+        secure: config.NODE_ENV !== 'development',
       })
     );
     app.use(hpp());
     app.use(helmet());
     app.use(
       cors({
-        origin: '*', // change to url after deploy
+        origin: config.CLIENT_URL,
         credentials: true,
         optionsSuccessStatus: 200,
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
