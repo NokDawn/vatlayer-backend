@@ -84,7 +84,7 @@ export class VatLayerServer {
         res: Response,
         next: NextFunction
       ) => {
-        console.log(error);
+        config.createLogger('SERVER - Error Handler').error(error);
         if (error instanceof CustomError) {
           return res.status(error.statusCode).json(error.serializeErrors());
         }
@@ -98,12 +98,14 @@ export class VatLayerServer {
       const httpServer: http.Server = new http.Server(app);
       this.startHttpServer(httpServer);
     } catch (error) {
-      console.log(error);
+      config.createLogger('SERVER - Start Server').error(error);
     }
   }
   private startHttpServer(httpServer: http.Server): void {
     httpServer.listen(SERVER_PORT, () => {
-      console.log(`Server running on port ${SERVER_PORT}`);
+      config
+        .createLogger('SERVER - HTTP Server')
+        .info(`Server is running on port ${SERVER_PORT}`);
     });
   }
 }

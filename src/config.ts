@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import winston from 'winston';
 
 dotenv.config({});
 
@@ -13,6 +14,19 @@ class Config {
     this.COOKIE_KEY_ONE = process.env.COOKIE_KEY_ONE;
     this.COOKIE_KEY_TWO = process.env.COOKIE_KEY_TWO;
     this.CLIENT_URL = process.env.CLIENT_URL;
+  }
+
+  public createLogger(name: string): winston.Logger {
+    return winston.createLogger({
+      defaultMeta: { service: name },
+      format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.timestamp(),
+        winston.format.json(),
+        winston.format.prettyPrint()
+      ),
+      transports: [new winston.transports.Console()],
+    });
   }
 
   public validateConfig(): void {
