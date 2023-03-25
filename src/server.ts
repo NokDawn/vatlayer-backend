@@ -14,6 +14,7 @@ import cookieSession from 'cookie-session';
 import compression from 'compression';
 import HTTP_STATUS from 'http-status-codes';
 import { config } from './config';
+import applicationRoutes from './routes';
 import 'express-async-errors';
 
 const SERVER_PORT = 5000;
@@ -60,7 +61,9 @@ export class VatLayerServer {
     app.use(urlencoded({ extended: true, limit: '50mb' }));
   }
 
-  private routeMiddleware(app: Application): void {}
+  private routeMiddleware(app: Application): void {
+    applicationRoutes(app);
+  }
 
   private globalErrorHandler(app: Application): void {}
 
