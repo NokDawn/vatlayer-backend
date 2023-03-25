@@ -1,7 +1,7 @@
 import Joi, { ObjectSchema } from 'joi';
 
-const validateVat: ObjectSchema = Joi.object().keys({
-  vatNumber: Joi.number().required().min(10).max(10).messages({
+const validateVatSchema: ObjectSchema = Joi.object().keys({
+  vatNumber: Joi.number().required().min(1000000000).max(9999999999).messages({
     'number.base': 'VAT number must be a number',
     'number.min': 'VAT number must be 10 digits',
     'number.max': 'VAT number must be 10 digits',
@@ -9,4 +9,4 @@ const validateVat: ObjectSchema = Joi.object().keys({
   }),
 });
 
-export { validateVat };
+export { validateVatSchema };
