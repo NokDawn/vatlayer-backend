@@ -1,4 +1,8 @@
 import {
+  CustomError,
+  IErrorResponse,
+} from './shared/globals/helpers/error-handler';
+import {
   Application,
   json,
   urlencoded,
@@ -65,7 +69,29 @@ export class VatLayerServer {
     applicationRoutes(app);
   }
 
-  private globalErrorHandler(app: Application): void {}
+  private globalErrorHandler(app: Application): void {
+    app.all('*', (req: Request, res: Response) => {
+      res.status(HTTP_STATUS.NOT_FOUND).json({
+        status: 'error',
+        message: `${req.originalUrl} not found.`,
+      });
+    });
+
+    app.use(
+      (
+        error: IErrorResponse,
+        _req: Request,
+        res: Response,
+        next: NextFunction
+      ) => {
+        console.log(error);
+        if (error instanceof CustomError) {
+          return res.status(error.statusCode).json(error.serializeErrors());
+        }
+        next();
+      }
+    );
+  }
 
   private async startServer(app: Application): Promise<void> {
     try {
