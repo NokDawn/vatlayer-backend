@@ -7,10 +7,10 @@
 3. W głównym folderze instalujemy paczki za pomocą `npm install`
 4. Tworzymy plik `.env` w głównym folderze, z następującymi zmiennymi
 
--NODE_ENV=TUTAJ_WSTAW_ZMIENNĄ
--COOKIE_KEY_ONE=TUTAJ_WSTAW_ZMIENNĄ
--COOKIE_KEY_TWO=TUTAJ_WSTAW_ZMIENNĄ
--CLIENT_URL=TUTAJ_WSTAW_ZMIENNĄ
+NODE_ENV=TUTAJ_WSTAW_ZMIENNĄ\
+COOKIE_KEY_ONE=TUTAJ_WSTAW_ZMIENNĄ\
+COOKIE_KEY_TWO=TUTAJ_WSTAW_ZMIENNĄ\
+CLIENT_URL=TUTAJ_WSTAW_ZMIENNĄ\
 
 5. Uruchamiamy projekt za pomocą komendy `npm run dev`
 
